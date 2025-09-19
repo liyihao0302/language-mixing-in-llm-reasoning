@@ -1,0 +1,40 @@
+mode: data_generation
+dataset_dir: "/Workspace/Users/xinji@pennmedicine.upenn.edu/research/Language-Mixing/translation/data/"
+seed: 0
+
+#trainer:
+#  batch_size: 512
+#  device: 'cuda:0'
+#  max_epoch: 64
+#  learning_rate: 1e-3
+#  num_workers: 0 # dataloader num_workers
+#  scheduler:
+#    step_size: 16
+#    gamma: 0.1
+
+
+dataset: # probing dataset
+  name: 'math500' # math500
+  layer_num: [63, 47, 31, 15, 0]
+  max_tokens: 8192
+  do_sample: False
+  temperature: 1.0
+  top_p: 1.0
+  heuristic_measure: 'lang_entropy'
+  heuristic_threshold: 0.2
+  data_ratio: 0.01 # =num_positions that we collect data per sample/ token_count
+  batch_size: 2
+  save_dir: "./"
+  feature_dim: 5120
+
+
+model:
+  name: "Qwen/QwQ-32B-Preview"
+  #name: "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+  dtype: 'float16'
+  cache_dir: "/root/.cache/huggingface"
+
+#probe:
+#  arch: 'linear'
+#  in_dim: 5120
+#  out_dim: 3
